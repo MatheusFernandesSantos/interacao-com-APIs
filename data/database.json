@@ -1,0 +1,46 @@
+{
+  "produtos": [
+    {
+      "id": 37,
+      "nome": "Mola de suspensão",
+      "tipo": "Suspensão"
+    },
+    {
+      "id": 38,
+      "nome": "Alavanca do câmbio",
+      "tipo": "Controle"
+    },
+    {
+      "id": 39,
+      "nome": "Buzina",
+      "tipo": "Controle"
+    },
+    {
+      "id": 40,
+      "nome": "Alavanca de seta",
+      "tipo": "Controle"
+    }
+  ],
+  "clientes": [
+    {
+      "id": 1,
+      "username": "joaomarcos",
+      "senha": "sa98g7s"
+    },
+    {
+      "id": 2,
+      "username": "thiagott",
+      "senha": "000"
+    },
+    {
+      "username": "miguelvs",
+      "senha": "40028922",
+      "id": 3
+    },
+    {
+      "id": 4,
+      "username": "juliana",
+      "senha": "2244000"
+    }
+  ]
+}

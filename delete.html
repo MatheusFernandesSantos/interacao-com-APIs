@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interação com APIs</title>
+</head>
+<body>
+    <h1>DELETE com DELETE ❌</h1>
+    <a href="./index.html">↩ Home</a>
+
+    <form action="" method="post">
+
+        <div class="controle-form">
+            <label for="idProduto">ID:</label>
+            <input type="number" min="1" id="idProduto" name="idProduto" required>
+        </div>
+
+        <div class="controle-form">
+            <label for="nomeProduto">Nome:</label>
+            <input type="text" id="nomeProduto" name="nomeProduto" disabled>
+        </div>
+
+        <div class="controle-form">
+            <label for="tipoProduto">Tipo:</label>
+            <select name="tipoProduto" id="tipoProduto" disabled>
+                <option value="Controle" selected>Controle</option>
+                <option value="Segurança">Segurança</option>
+                <option value="Suspensão">Suspensão</option>
+                <option value="Carroceria">Carroceria</option>
+                <option value="Acessório">Acessório</option>
+            </select>
+        </div>
+
+        <button type="button" id="remover">Remover</button>
+
+    </form>
+
+    <div id="produtos"></div>
+
+    <script>
+        buscaProdutos();
+
+        document.querySelector('#remover').addEventListener('click', () => {
+
+            const idProduto = document.querySelector('#idProduto').value;
+
+            fetch(`http://[::1]:3000/produtos/${idProduto}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            })
+            .then(resposta => {
+                if (resposta.ok) {
+                    window.alert('Produto removido!');
+                    buscaProdutos();
+                } else {
+                    window.alert('Erro');
+                }
+            })
+        });
+
+        function buscaProdutos() {
+            fetch('http://[::1]:3000/produtos', {
+                method: 'GET',
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            })
+            .then(resposta => resposta.json())
+            .then(resposta => {
+
+                const produtos = document.querySelector('#produtos');
+                const tituloProdutos = document.createElement('h2');
+
+                produtos.innerHTML = '';
+                tituloProdutos.innerHTML = 'Produtos';
+                produtos.append(tituloProdutos);
+
+                resposta.forEach(produto => {
+                    produtos.innerHTML += `<ul id="${produto.id}"><li>ID: ${produto.id}</li><li>Nome: ${produto.nome}</li><li>Tipo: ${produto.tipo ? produto.tipo : ""}</li></ul>`;
+                });
+            })
+        }
+    </script>
+</body>
+</html>
